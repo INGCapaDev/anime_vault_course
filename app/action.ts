@@ -20,8 +20,8 @@ export const fetchAnime = async (page: number) => {
   const response = await fetch(
     BASE_URL + `?page=${page}&limit=8&order_by=popularity`
   );
+
   const { data, pagination } = await response.json();
-  console.log(pagination);
 
   return {
     data,
