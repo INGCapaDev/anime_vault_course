@@ -1,14 +1,25 @@
 import { AnimeData } from '@/app/action';
 import Image from 'next/image';
+import { MotionDiv } from './MotionDiv';
 
 interface Prop {
   anime: AnimeData;
   index: number;
 }
 
-function AnimeCard({ anime }: Prop) {
+const variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+function AnimeCard({ anime, index }: Prop) {
   return (
-    <div className='max-w-sm rounded relative w-full'>
+    <MotionDiv
+      variants={variants}
+      initial='hidden'
+      animate='visible'
+      transition={{ duration: 0.5, delay: index * 0.15, ease: 'easeInOut' }}
+      className='max-w-sm rounded relative w-full'>
       <div className='relative w-full h-[37vh]'>
         <Image
           src={anime.images.webp.image_url}
@@ -53,7 +64,7 @@ function AnimeCard({ anime }: Prop) {
           </div>
         </div>
       </div>
-    </div>
+    </MotionDiv>
   );
 }
 

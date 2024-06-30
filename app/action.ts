@@ -24,10 +24,13 @@ export const fetchAnime = async (page: number) => {
   const { data, pagination } = await response.json();
 
   return {
-    data,
+    data: data.map((item: AnimeData, index: number) => ({
+      ...item,
+      animation_index: index,
+    })),
     pagination,
   } as {
-    data: AnimeData[];
+    data: (AnimeData & { animation_index: number })[];
     pagination: {
       last_visible_page: number;
       has_next_page: boolean;
